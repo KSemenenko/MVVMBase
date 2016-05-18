@@ -55,12 +55,12 @@ namespace MVVMBaseUnitTest
         {
             ModelClass myClass = new ModelClass();
 
-            myClass.MyProperty = "1";
+            myClass.MyCommandProperty = "1";
             Assert.AreEqual(myClass.MyCommand.CanExecute(null), true);
             myClass.MyCommand.Execute("1");
             Assert.AreEqual(myClass.MyPropertyByName, "1");
 
-            myClass.MyProperty = "2";
+            myClass.MyCommandProperty = "2";
             Assert.AreEqual(myClass.MyCommand.CanExecute(null), false);
             myClass.MyCommand.Execute("2");
             Assert.AreEqual(myClass.MyPropertyByName, "2");
@@ -71,6 +71,18 @@ namespace MVVMBaseUnitTest
 
     public class ModelClass : BaseViewModel
     {
+        private string myCommandProperty;
+        public string MyCommandProperty
+        {
+            get { return myCommandProperty; }
+            set
+            {
+                myCommandProperty = value;
+                OnPropertyChanged(() => MyCommandProperty);
+                OnPropertyChanged(() => MyCommand);
+            }
+        }
+
         private string myProperty;
         public string MyProperty
         {
@@ -79,7 +91,6 @@ namespace MVVMBaseUnitTest
             {
                 myProperty = value;
                 OnPropertyChanged(() => MyProperty);
-                OnPropertyChanged(() => MyCommand);
             }
         }
 
@@ -113,7 +124,7 @@ namespace MVVMBaseUnitTest
                                            {
                                                MyPropertyByName = (string)executedParam;
                                            },
-                canExecutedParam => MyProperty == "1");
+                canExecutedParam => MyCommandProperty == "1");
             }
         }
     }
