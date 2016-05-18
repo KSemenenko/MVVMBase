@@ -1,7 +1,12 @@
 # MVVMBase
 
+## NuGet
+(https://www.nuget.org/packages/KSemenenko.MVVMBase/)
+
 ### How it use
 code sample:
+
+
 
 ```
 public class ModelClass : BaseViewModel
