@@ -1,7 +1,7 @@
 # MVVMBase
 
 ## NuGet
-(https://www.nuget.org/packages/KSemenenko.MVVMBase/)
+https://www.nuget.org/packages/KSemenenko.MVVMBase/
 
 ### How it use
 code sample:
