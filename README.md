@@ -17,6 +17,27 @@ public class ModelClass : BaseViewModel
 		}
 	}
 	
+	private string myPropertyByName;
+	public string MyPropertyByName
+    {
+		get { return myPropertyByName; }
+		set
+		{
+			myPropertyByName = value;
+			OnPropertyChanged(nameof(MyPropertyByName));
+		}
+	}
+	
+	private string myPropertyAutoChange;
+	public string MyPropertyAutoChange
+    {
+		get { return myPropertyAutoChange; }
+		set
+		{
+			SetProperty(ref myPropertyAutoChange, value);
+		}
+	}
+	
 	
 	public ICommand MyCommand
 	{
