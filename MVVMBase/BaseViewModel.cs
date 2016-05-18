@@ -38,13 +38,6 @@ namespace MVVMBase
         protected void OnPropertyChanged(string propertyName)
         {
             Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName)); 
-
-            //var handler = PropertyChanged;
-            //if(handler != null)
-            //{
-            //    var e = new PropertyChangedEventArgs(propertyName);
-            //    handler(this, e);
-            //}
         }
 
         /// <summary>
