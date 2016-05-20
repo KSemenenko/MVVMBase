@@ -1,6 +1,6 @@
 # MVVMBase Mini Framework
  This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms. 
-## Available in NuGet. 
+## Available at NuGet. 
 https://www.nuget.org/packages/KSemenenko.MVVMBase/
 
 ### Example use:
@@ -40,7 +40,6 @@ public class ModelClass : BaseViewModel
 			SetProperty(ref myPropertyAutoChange, value);
 		}
 	}
-	
 	
 	public ICommand MyCommand
 	{
