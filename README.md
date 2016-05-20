@@ -1,12 +1,11 @@
 # MVVMBase Mini Framework
- This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms. 
+This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms. 
+ 
 ## Available at NuGet. 
 https://www.nuget.org/packages/KSemenenko.MVVMBase/
 
-### Example use:
-
-
-```
+## Example use:
+```cs
 public class ModelClass : BaseViewModel
 {
 	private string myProperty;
