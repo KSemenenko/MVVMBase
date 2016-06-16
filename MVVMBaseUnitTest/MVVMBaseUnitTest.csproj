@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MVVMBase\MVVMBase.csproj">
-      <Project>{f04ba524-9fbb-43f1-9f36-024ec8db7faa}</Project>
-      <Name>MVVMBase</Name>
+    <ProjectReference Include="..\MVVMBase.Desktop.v45\MVVMBase.Desktop.v45.csproj">
+      <Project>{ba56f824-2a99-45fd-8adb-3af0a7aa3848}</Project>
+      <Name>MVVMBase.Desktop.v45</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

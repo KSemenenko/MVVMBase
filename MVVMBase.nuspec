@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata minClientVersion="2.8.3">
+    <id>KSemenenko.MVVMBase </id>
+    <version>1.2.0</version>
+    <title>MVVMBase Mini Framework</title>
+    <authors>ksemenenko</authors>
+    <owners>ksemenenko</owners>
+    <licenseUrl>https://github.com/KSemenenko/Google-Analytics-for-Xamarin-Forms/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/KSemenenko/Google-Analytics-for-Xamarin-Forms</projectUrl>
+    <!--<iconUrl>https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Plugins-Templates/icons/plugin_icon_nuget.png</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms. 
+    </description>
+    <summary>This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms. </summary>
+    <tags>MVVM, MVVMBase, base, wpf, xamarin, pcl, plugin, windows phone, uwp, winphone, wp8, winrt, android, xamarin.forms, ios, version</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    
+    <!--.NET 3.5-->
+    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.Desktop.v35.dll" target="lib\net35\MVVMBase.Desktop.v35.dll" />
+    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.Desktop.v35.xml" target="lib\net35\MVVMBase.Desktop.v35.xml" />
+    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.Desktop.v35.pdb" target="lib\net35\MVVMBase.Desktop.v35.pdb" />
+
+    <!--.NET 3.5 client-->
+    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.Desktop.v35client.dll" target="lib\net35-client\MVVMBase.Desktop.v35client.dll" />
+    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.Desktop.v35client.xml" target="lib\net35-client\MVVMBase.Desktop.v35client.xml" />
+    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.Desktop.v35client.pdb" target="lib\net35-client\MVVMBase.Desktop.v35client.pdb" />
+
+    <!--.NET 4.0-->
+    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.Desktop.v40.dll" target="lib\net40\MVVMBase.Desktop.v40.dll" />
+    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.Desktop.v40.xml" target="lib\net40\MVVMBase.Desktop.v40.xml" />
+    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.Desktop.v40.pdb" target="lib\net40\MVVMBase.Desktop.v40.pdb" />
+
+    <!--.NET 4.0 client-->
+    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.Desktop.v40client.dll" target="lib\net40-client\MVVMBase.Desktop.v40client.dll" />
+    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.Desktop.v40client.xml" target="lib\net40-client\MVVMBase.Desktop.v40client.xml" />
+    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.Desktop.v40client.pdb" target="lib\net40-client\MVVMBase.Desktop.v40client.pdb" />
+
+    <!--.NET 4.5-->
+    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.Desktop.v45.dll" target="lib\net45\MVVMBase.Desktop.v45.dll" />
+    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.Desktop.v45.xml" target="lib\net45\MVVMBase.Desktop.v45.xml" />
+    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.Desktop.v45.pdb" target="lib\net45\MVVMBase.Desktop.v45.pdb" />
+
+    <!--.NET 4.6-->
+    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.Desktop.v46.dll" target="lib\net46\MVVMBase.Desktop.v46.dll" />
+    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.Desktop.v46.xml" target="lib\net46\MVVMBase.Desktop.v46.xml" />
+    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.Desktop.v46.pdb" target="lib\net46\MVVMBase.Desktop.v46.pdb" />
+
+    <!--Portable-->
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.Portable.dll" target="lib\portable-net45+wp8+win8\MVVMBase.Portable.dll" />
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.Portable.xml" target="lib\portable-net45+wp8+win8\MVVMBase.Portable.xml" />
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.Portable.pdb" target="lib\portable-net45+wp8+win8\MVVMBase.Portable.pdb" />
+
+    <!--UWP-->
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.dll" target="lib\UAP10\MVVMBase.UWP.dll" />
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.xml" target="lib\UAP10\MVVMBase.UWP.xml" />
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.pdb" target="lib\UAP10\MVVMBase.UWP.pdb" />  
+
+  </files>
+</package>
