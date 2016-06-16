@@ -42,6 +42,9 @@
     <Compile Include="BaseCommand.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
+	<Compile Include="..\MVVMBase.Shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
