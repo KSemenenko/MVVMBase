@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -11,6 +12,9 @@ namespace MVVMBase
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        ///     Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -37,10 +41,17 @@ namespace MVVMBase
         /// <param name="propertyName">Property name</param>
         protected void OnPropertyChanged(string propertyName)
         {
-            Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName)); 
+            Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
+        /// <summary>
+        ///     Changes the property and call the PropertyChanged event for this property name.
+        /// </summary>
+        [SuppressMessage("ReSharper", "MethodOverloadWithOptionalParameter")]
+        protected void OnPropertyChanged([CallerMemberName] string hiddenPropertyName = null, bool hiddenCallMemberName = true)
+        {
+            OnPropertyChanged(hiddenPropertyName);
+        }
 
         /// <summary>
         ///     Changes the property and call the PropertyChanged event.

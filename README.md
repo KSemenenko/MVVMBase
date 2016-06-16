@@ -40,6 +40,17 @@ public class ModelClass : BaseViewModel
         }
     }
     
+    private string myPropertyByMemberName;
+    public string MyPropertyByMemberName
+    {
+        get { return myPropertyByMemberName; }
+        set
+        {
+            myPropertyByMemberName = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ICommand MyCommand
     {
         get

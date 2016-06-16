@@ -17,6 +17,19 @@ namespace MVVMBaseUnitTest
 
             myClass.MyProperty = "string";
             Thread.Sleep(1000);
+            Assert.AreEqual(myClass.MyProperty, "string");
+        }
+
+        [TestMethod]
+        public void MyPropertyByMemberNameTest()
+        {
+            var myClass = new ModelClass();
+
+            myClass.PropertyChanged += (se, ev) => { Assert.AreEqual(ev.PropertyName, "MyPropertyByMemberName"); };
+
+            myClass.MyPropertyByMemberName = "string";
+            Thread.Sleep(1000);
+            Assert.AreEqual(myClass.MyPropertyByMemberName, "string");
         }
 
         [TestMethod]
@@ -28,6 +41,7 @@ namespace MVVMBaseUnitTest
 
             myClass.MyPropertyByName = "string";
             Thread.Sleep(1000);
+            Assert.AreEqual(myClass.MyPropertyByName, "string");
         }
 
         [TestMethod]
@@ -39,6 +53,7 @@ namespace MVVMBaseUnitTest
 
             myClass.MyPropertyAutoChange = "string";
             Thread.Sleep(1000);
+            Assert.AreEqual(myClass.MyPropertyAutoChange, "string");
         }
 
         [TestMethod]
@@ -64,6 +79,7 @@ namespace MVVMBaseUnitTest
         private string myProperty;
         private string myPropertyAutoChange;
         private string myPropertyByName;
+        private string myPropertyByMemberName;
 
         public string MyCommandProperty
         {
@@ -100,6 +116,16 @@ namespace MVVMBaseUnitTest
         {
             get { return myPropertyAutoChange; }
             set { SetProperty(ref myPropertyAutoChange, value); }
+        }
+
+        public string MyPropertyByMemberName
+        {
+            get { return myPropertyByMemberName; }
+            set
+            {
+                myPropertyByMemberName = value;
+                OnPropertyChanged();
+            }
         }
 
         public ICommand MyCommand

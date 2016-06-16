@@ -34,6 +34,9 @@ namespace MVVMBase
             this.canExecute = canExecute;
         }
 
+        /// <summary>
+        ///     Occurs when changes occur that affect whether or not the command should execute.
+        /// </summary>
         public event EventHandler CanExecuteChanged;
 
         /// <summary>
