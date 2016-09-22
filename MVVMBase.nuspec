@@ -3,13 +3,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>ksemenenko.MVVMBase </id>
-    <version>1.2.0.4</version>
+    <version>1.2.0.5</version>
     <title>MVVMBase Mini Framework</title>
     <authors>ksemenenko</authors>
     <owners>ksemenenko</owners>
     <licenseUrl>https://github.com/KSemenenko/MVVMBase/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/KSemenenko/MVVMBase</projectUrl>
-    <!--<iconUrl>https://github.com/KSemenenko/MVVMBase/icon_nuget.png</iconUrl>-->
+    <iconUrl>https://raw.githubusercontent.com/KSemenenko/MVVMBase/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms. 
