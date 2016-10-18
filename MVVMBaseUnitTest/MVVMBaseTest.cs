@@ -71,6 +71,20 @@ namespace MVVMBaseUnitTest
             myClass.MyCommand.Execute("2");
             Assert.AreEqual(myClass.MyPropertyByName, "2");
         }
+
+        [TestMethod]
+        public void AllOnPropertyChanged()
+        {
+            var myClass = new ModelClass();
+            int count = 0;
+
+            myClass.PropertyChanged += (se, ev) => Interlocked.Increment(ref count);
+
+            myClass.UpdateAll();
+
+            Thread.Sleep(1000);
+            Assert.AreEqual(count, 6); // 4 properties and 2 commands
+        }
     }
 
     public class ModelClass : BaseViewModel
@@ -136,5 +150,11 @@ namespace MVVMBaseUnitTest
                     canExecutedParam => MyCommandProperty == "1");
             }
         }
+
+        public void UpdateAll()
+        {
+            OnPropertyChangedForAll();
+        }
+
     }
 }

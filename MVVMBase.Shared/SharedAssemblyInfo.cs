@@ -4,7 +4,7 @@
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyDescription("This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms. ")]
+[assembly: AssemblyDescription("This is a small library that uses pattern MVVM for a handy use in WPF and Xamarin forms.")]
 [assembly: AssemblyCompany("ksemenenko")]
 [assembly: AssemblyProduct("MVVMBase")]
 [assembly: AssemblyCopyright("Copyright © K.Semenenko 2016")]

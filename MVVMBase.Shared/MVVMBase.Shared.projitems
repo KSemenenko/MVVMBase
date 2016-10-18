@@ -6,7 +6,7 @@
     <SharedGUID>9a2cf635-7c43-4c4b-873b-fe128b0b8470</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>MVVMBase.Shared</Import_RootNamespace>
+    <Import_RootNamespace>MVVMBase</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)SharedAssemblyInfo.cs" />

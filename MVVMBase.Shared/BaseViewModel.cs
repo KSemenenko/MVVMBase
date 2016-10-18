@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Reflection;
 
 namespace MVVMBase
 {
@@ -45,12 +47,36 @@ namespace MVVMBase
         }
 
         /// <summary>
+        ///     Changes the property and call the PropertyChanged event.
+        /// </summary>
+        /// <param name="propertyNames">Array of Property name</param>
+        protected void OnPropertyChanged(params string[] propertyNames)
+        {
+            foreach(var name in propertyNames)
+            {
+                OnPropertyChanged(name);
+            }
+            
+        }
+
+        /// <summary>
         ///     Changes the property and call the PropertyChanged event for this property name.
         /// </summary>
         [SuppressMessage("ReSharper", "MethodOverloadWithOptionalParameter")]
         protected void OnPropertyChanged([CallerMemberName] string hiddenPropertyName = null, bool hiddenCallMemberName = true)
         {
             OnPropertyChanged(hiddenPropertyName);
+        }
+
+        /// <summary>
+        ///     Call OnPropertyChanged for all properties
+        /// </summary>
+        protected void OnPropertyChangedForAll()
+        {
+            foreach (PropertyInfo item in GetType().GetTypeInfo().DeclaredProperties)
+            {
+                OnPropertyChanged(item.Name);
+            }
         }
 
         /// <summary>
