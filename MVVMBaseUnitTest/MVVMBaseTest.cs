@@ -95,6 +95,15 @@ namespace MVVMBaseUnitTest
         private string myPropertyByName;
         private string myPropertyByMemberName;
 
+        public ModelClass()
+        {
+            this.BindToPropertyChange(() => MyCommand, () => MyCommand);
+            this.BindToPropertyChange("s", "s");
+            this.BindToPropertyChange(()=> MyCommand, "s");
+            this.BindToPropertyChange("s", () => MyCommand);
+            
+        }
+
         public string MyCommandProperty
         {
             get { return myCommandProperty; }
