@@ -10,7 +10,7 @@ namespace MVVMBase
     {
         public static void BindToPropertyChange<T>(this BaseViewModel viewModel, Expression<Func<T>> action, params Expression<Func<T>>[] actions)
         {
-          
+            
         }
 
         public static void BindToPropertyChange(this BaseViewModel viewModel, string action, params string[] actions)

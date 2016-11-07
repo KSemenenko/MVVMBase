@@ -29,6 +29,7 @@ namespace MVVMBase
         {
             var propertyName = GetPropertyName(action);
             OnPropertyChanged(propertyName);
+
         }
 
         private static string GetPropertyName<T>(Expression<Func<T>> action)
@@ -91,6 +92,26 @@ namespace MVVMBase
         {
             storage = value;
             OnPropertyChanged(propertyName);
+        }
+
+        public void BindToPropertyChange<T>(Expression<Func<T>> action, params Expression<Func<T>>[] actions)
+        {                                         
+
+        }
+
+        public void BindToPropertyChange(string action, params string[] actions)
+        {
+
+        }
+
+        public void BindToPropertyChange<T>(Expression<Func<T>> action, params string[] actions)
+        {
+
+        }
+
+        public void BindToPropertyChange<T>(string action, params Expression<Func<T>>[] actions)
+        {
+
         }
     }
 }
