@@ -15,6 +15,8 @@ namespace MVVMBase
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
+        private Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>(); 
+
         /// <summary>
         ///     Occurs when a property value changes.
         /// </summary>
@@ -94,24 +96,63 @@ namespace MVVMBase
             OnPropertyChanged(propertyName);
         }
 
+        /// <summary>
+        /// Associates OnPropertyChanged event to properties.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action">Main property</param>
+        /// <param name="actions">Related properties</param>
         public void BindToPropertyChange<T>(Expression<Func<T>> action, params Expression<Func<T>>[] actions)
-        {                                         
-
+        {
+            var stringAction = GetPropertyName(action);
+            var stringActions = new List<string>(actions.Length);
+            stringActions.AddRange(actions.Select(GetPropertyName));
+            BindToPropertyChange(stringAction, stringActions.ToArray());
         }
 
+        /// <summary>
+        /// Associates OnPropertyChanged event to properties.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action">Main property</param>
+        /// <param name="actions">Related properties</param>
         public void BindToPropertyChange(string action, params string[] actions)
         {
-
+            List<string> lst;
+            if(bindDictionary.TryGetValue(action, out lst))
+            {
+                lst.AddRange(actions);
+                bindDictionary[action] = new List<string>(lst.Distinct());
+            }
+            else
+            {
+                bindDictionary.Add(action, new List<string>(actions));
+            }
         }
 
+        /// <summary>
+        /// Associates OnPropertyChanged event to properties.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action">Main property</param>
+        /// <param name="actions">Related properties</param>
         public void BindToPropertyChange<T>(Expression<Func<T>> action, params string[] actions)
         {
-
+            var stringAction = GetPropertyName(action);
+            BindToPropertyChange(stringAction, actions);
         }
 
+        /// <summary>
+        /// Associates OnPropertyChanged event to properties.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action">Main property</param>
+        /// <param name="actions">Related properties</param>
         public void BindToPropertyChange<T>(string action, params Expression<Func<T>>[] actions)
         {
-
+            var stringActions = new List<string>(actions.Length);
+            stringActions.AddRange(actions.Select(GetPropertyName));
+            BindToPropertyChange(action, stringActions.ToArray());
         }
     }
 }
