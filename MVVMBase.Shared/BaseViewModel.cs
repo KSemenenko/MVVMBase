@@ -15,7 +15,7 @@ namespace MVVMBase
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>(); 
+        private readonly Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>(); 
 
         /// <summary>
         ///     Occurs when a property value changes.
@@ -48,6 +48,16 @@ namespace MVVMBase
         protected void OnPropertyChanged(string propertyName)
         {
             Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+            //bind properties
+            List<string> lst;
+            if (bindDictionary.TryGetValue(propertyName, out lst))
+            {
+                foreach(var item in lst)
+                {
+                    OnPropertyChanged(item);
+                }
+            }
         }
 
         /// <summary>
