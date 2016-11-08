@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Input;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -85,85 +86,26 @@ namespace MVVMBaseUnitTest
             Thread.Sleep(1000);
             Assert.AreEqual(count, 6); // 4 properties and 2 commands
         }
+
+        [TestMethod]
+        public void BindTest()
+        {
+            var myClass = new BindClass();
+            List<string> propertyList = new List<string>();
+            myClass.PropertyChanged += (se, ev) => {propertyList.Add(ev.PropertyName);};
+
+
+            myClass.BindToPropertyChange(() => myClass.MyCommand, () => myClass.MyCommand);
+            myClass.BindToPropertyChange("s", "s");
+            myClass.BindToPropertyChange(() => myClass.MyCommand, "s");
+            myClass.BindToPropertyChange("s", () => myClass.MyCommand);
+
+            myClass.MyProperty = "string";
+
+            Thread.Sleep(1000);
+            Assert.AreEqual(myClass.MyProperty, "string");
+        }
     }
 
-    public class ModelClass : BaseViewModel
-    {
-        private string myCommandProperty;
-        private string myProperty;
-        private string myPropertyAutoChange;
-        private string myPropertyByName;
-        private string myPropertyByMemberName;
-
-        public ModelClass()
-        {
-            this.BindToPropertyChange(() => MyCommand, () => MyCommand);
-            this.BindToPropertyChange("s", "s");
-            this.BindToPropertyChange(()=> MyCommand, "s");
-            this.BindToPropertyChange("s", () => MyCommand);
-            
-        }
-
-        public string MyCommandProperty
-        {
-            get { return myCommandProperty; }
-            set
-            {
-                myCommandProperty = value;
-                OnPropertyChanged(() => MyCommandProperty);
-                OnPropertyChanged(() => MyCommand);
-            }
-        }
-
-        public string MyProperty
-        {
-            get { return myProperty; }
-            set
-            {
-                myProperty = value;
-                OnPropertyChanged(() => MyProperty);
-            }
-        }
-
-        public string MyPropertyByName
-        {
-            get { return myPropertyByName; }
-            set
-            {
-                myPropertyByName = value;
-                OnPropertyChanged(nameof(MyPropertyByName));
-            }
-        }
-
-        public string MyPropertyAutoChange
-        {
-            get { return myPropertyAutoChange; }
-            set { SetProperty(ref myPropertyAutoChange, value); }
-        }
-
-        public string MyPropertyByMemberName
-        {
-            get { return myPropertyByMemberName; }
-            set
-            {
-                myPropertyByMemberName = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ICommand MyCommand
-        {
-            get
-            {
-                return new DelegateCommand(executedParam => { MyPropertyByName = (string)executedParam; },
-                    canExecutedParam => MyCommandProperty == "1");
-            }
-        }
-
-        public void UpdateAll()
-        {
-            OnPropertyChangedForAll();
-        }
-
-    }
+    
 }
