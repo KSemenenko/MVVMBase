@@ -8,6 +8,14 @@ https://www.nuget.org/packages/ksemenenko.MVVMBase/
 ```cs
 public class ModelClass : BaseViewModel
 {
+
+    public ModelClass()
+    {
+        // bind to property
+        BindToPropertyChange(nameof(MyProperty), nameof(MyCommand));
+        BindToPropertyChange(() => MyCommand, nameof(MyPropertyByName));
+    }
+
     private string myProperty;
     public string MyProperty
     {
@@ -67,6 +75,7 @@ public class ModelClass : BaseViewModel
 
 |Platform|Supported|Version|
 | ------------------- | :-----------: | :------------------: |
+|.NET|Yes|3.5+|
 |Xamarin.iOS|Yes|iOS 6+|
 |Xamarin.iOS Unified|Yes|iOS 6+|
 |Xamarin.Android|Yes|API 10+|

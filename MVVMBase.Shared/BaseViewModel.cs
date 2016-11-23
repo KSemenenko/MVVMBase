@@ -112,20 +112,6 @@ namespace MVVMBase
         /// <typeparam name="T"></typeparam>
         /// <param name="action">Main property</param>
         /// <param name="actions">Related properties</param>
-        public void BindToPropertyChange<T>(Expression<Func<T>> action, params Expression<Func<T>>[] actions)
-        {
-            var stringAction = GetPropertyName(action);
-            var stringActions = new List<string>(actions.Length);
-            stringActions.AddRange(actions.Select(GetPropertyName));
-            BindToPropertyChange(stringAction, stringActions.ToArray());
-        }
-
-        /// <summary>
-        /// Associates OnPropertyChanged event to properties.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="action">Main property</param>
-        /// <param name="actions">Related properties</param>
         public void BindToPropertyChange(string action, params string[] actions)
         {
             List<string> lst;
@@ -152,17 +138,5 @@ namespace MVVMBase
             BindToPropertyChange(stringAction, actions);
         }
 
-        /// <summary>
-        /// Associates OnPropertyChanged event to properties.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="action">Main property</param>
-        /// <param name="actions">Related properties</param>
-        public void BindToPropertyChange<T>(string action, params Expression<Func<T>>[] actions)
-        {
-            var stringActions = new List<string>(actions.Length);
-            stringActions.AddRange(actions.Select(GetPropertyName));
-            BindToPropertyChange(action, stringActions.ToArray());
-        }
     }
 }

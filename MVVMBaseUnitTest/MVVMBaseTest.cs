@@ -94,16 +94,14 @@ namespace MVVMBaseUnitTest
             List<string> propertyList = new List<string>();
             myClass.PropertyChanged += (se, ev) => {propertyList.Add(ev.PropertyName);};
 
-
-            myClass.BindToPropertyChange(() => myClass.MyCommand, () => myClass.MyCommand);
-            myClass.BindToPropertyChange("s", "s");
-            myClass.BindToPropertyChange(() => myClass.MyCommand, "s");
-            myClass.BindToPropertyChange("s", () => myClass.MyCommand);
+            myClass.BindToPropertyChange(nameof(myClass.MyProperty), nameof(myClass.MyCommand));
+            myClass.BindToPropertyChange(() => myClass.MyCommand, nameof(myClass.MyPropertyByName));
 
             myClass.MyProperty = "string";
 
             Thread.Sleep(1000);
-            Assert.AreEqual(myClass.MyProperty, "string");
+            
+            Assert.AreEqual(propertyList.Count,3);
         }
     }
 
