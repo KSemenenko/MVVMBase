@@ -9,6 +9,7 @@
     <Import_RootNamespace>MVVMBase</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)NotifyPropertyChangedExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SharedAssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseViewModel.cs" />

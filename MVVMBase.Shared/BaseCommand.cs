@@ -14,14 +14,14 @@ namespace MVVMBase
         /// <summary>
         ///     Initializes a new instance of the  class.
         /// </summary>
-        /// <param name="execute">The execute action.</param>
+        /// <param name="command">The command action.</param>
         /// <param name="canExecute">The can execute predicate.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public BaseCommand(Action command, Func<bool> canExecute = null)
         {
             if(command == null)
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
             this.canExecute = canExecute;
             this.command = command;
