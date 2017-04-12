@@ -14,6 +14,11 @@ public class ModelClass : BaseViewModel
         // bind to property
         BindToPropertyChange(nameof(MyProperty), nameof(MyCommand));
         BindToPropertyChange(() => MyCommand, nameof(MyPropertyByName));
+
+		//or
+		Bind(nameof(MyProperty)).To(nameof(MyCommand));
+        Bind(() => MyCommand).To(()=> MyPropertyByName);
+
     }
 
     private string myProperty;

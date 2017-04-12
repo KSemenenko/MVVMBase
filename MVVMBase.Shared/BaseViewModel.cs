@@ -15,7 +15,8 @@ namespace MVVMBase
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private readonly Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>(); 
+        private readonly Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>();
+        private string bindPropertyName;
 
         /// <summary>
         ///     Occurs when a property value changes.
@@ -112,23 +113,59 @@ namespace MVVMBase
             OnPropertyChanged(propertyName);
         }
 
+
+
+        public BaseViewModel Bind(string propertyName)
+        {
+            bindPropertyName = propertyName;
+            return this;
+        }
+
+        public BaseViewModel Bind<T>(Expression<Func<T>> propertyName)
+        {
+            bindPropertyName = GetPropertyName(propertyName);
+            return this;
+        }
+
+        public BaseViewModel To(string propertyName)
+        {
+            if (string.IsNullOrEmpty(bindPropertyName))
+            {
+                throw new ArgumentException("Bind property not set.");
+            }
+
+            BindToPropertyChange(bindPropertyName, propertyName);
+            return this;
+        }
+
+        public BaseViewModel To<T>(Expression<Func<T>> propertyName)
+        {
+            if (string.IsNullOrEmpty(bindPropertyName))
+            {
+                throw new ArgumentException("Bind property not set.");
+            }
+
+            BindToPropertyChange(bindPropertyName, GetPropertyName(propertyName));
+            return this;
+        }
+
         /// <summary>
         /// Associates OnPropertyChanged event to properties.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="action">Main property</param>
+        /// <param name="propertyName">Main property</param>
         /// <param name="actions">Related properties</param>
-        public void BindToPropertyChange(string action, params string[] actions)
+        public void BindToPropertyChange(string propertyName, params string[] actions)
         {
-            List<string> lst;
-            if(bindDictionary.TryGetValue(action, out lst))
+            List<string> list;
+            if(bindDictionary.TryGetValue(propertyName, out list))
             {
-                lst.AddRange(actions);
-                bindDictionary[action] = new List<string>(lst.Distinct());
+                list.AddRange(actions);
+                bindDictionary[propertyName] = new List<string>(list.Distinct());
             }
             else
             {
-                bindDictionary.Add(action, new List<string>(actions));
+                bindDictionary.Add(propertyName, new List<string>(actions));
             }
         }
 
@@ -136,12 +173,12 @@ namespace MVVMBase
         /// Associates OnPropertyChanged event to properties.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="action">Main property</param>
-        /// <param name="actions">Related properties</param>
-        public void BindToPropertyChange<T>(Expression<Func<T>> action, params string[] actions)
+        /// <param name="propertyName">Main property</param>
+        /// <param name="propertyNames">Related properties</param>
+        public void BindToPropertyChange<T>(Expression<Func<T>> propertyName, params string[] propertyNames)
         {
-            var stringAction = GetPropertyName(action);
-            BindToPropertyChange(stringAction, actions);
+            var stringAction = GetPropertyName(propertyName);
+            BindToPropertyChange(stringAction, propertyNames);
         }
 
     }
