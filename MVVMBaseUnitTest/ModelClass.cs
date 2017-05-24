@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MVVMBase;
+using MVVMBase.Commands;
 
 namespace MVVMBaseUnitTest
 {

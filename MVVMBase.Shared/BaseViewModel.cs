@@ -57,8 +57,7 @@ namespace MVVMBase
             CallPropertyChangedEvent(propertyName);
 
             //bind properties
-            List<string> lst;
-            if (bindDictionary.TryGetValue(propertyName, out lst))
+            if (bindDictionary.TryGetValue(propertyName, out var lst))
             {
                 foreach(var item in lst)
                 {
@@ -114,19 +113,30 @@ namespace MVVMBase
         }
 
 
-
+        /// <summary>
+        /// Set property to bind.
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
         public BaseViewModel Bind(string propertyName)
         {
             bindPropertyName = propertyName;
             return this;
         }
 
+        /// <summary>
+        /// Set property to bind.
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
         public BaseViewModel Bind<T>(Expression<Func<T>> propertyName)
         {
             bindPropertyName = GetPropertyName(propertyName);
             return this;
         }
 
+        /// <summary>
+        /// Bind to property.
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
         public BaseViewModel To(string propertyName)
         {
             if (string.IsNullOrEmpty(bindPropertyName))
@@ -138,6 +148,10 @@ namespace MVVMBase
             return this;
         }
 
+        /// <summary>
+        /// Bind to property.
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
         public BaseViewModel To<T>(Expression<Func<T>> propertyName)
         {
             if (string.IsNullOrEmpty(bindPropertyName))

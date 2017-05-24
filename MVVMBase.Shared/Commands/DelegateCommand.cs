@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MVVMBase
+namespace MVVMBase.Commands
 {
     /// <summary>
     ///     Provides a simple ICommand implementation.
