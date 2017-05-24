@@ -71,6 +71,14 @@ namespace MVVMBaseUnitTest
             Assert.AreEqual(myClass.MyCommand.CanExecute(null), false);
             myClass.MyCommand.Execute("2");
             Assert.AreEqual(myClass.MyPropertyByName, "2");
+
+            myClass.MyCommandProperty = "1";
+            myClass.MyCommand.Run("3");
+            Assert.AreEqual(myClass.MyPropertyByName, "3");
+
+            myClass.MyCommandProperty = "2";
+            myClass.MyCommand.Run("4");
+            Assert.AreEqual(myClass.MyPropertyByName, "3");
         }
 
         [TestMethod]

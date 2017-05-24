@@ -14,7 +14,7 @@ namespace MVVMBase
         /// <summary>
         ///     Initializes a new instance of the  class.
         /// </summary>
-        /// <param name="execute">The execute action.</param>
+        /// <param name="command">The execute action.</param>
         /// <param name="canExecute">The can execute predicate.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public BaseCommand(Action command, Func<bool> canExecute = null)

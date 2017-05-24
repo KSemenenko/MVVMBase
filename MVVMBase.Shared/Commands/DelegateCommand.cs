@@ -26,11 +26,7 @@ namespace MVVMBase
         /// <param name="canExecute">The can execute predicate.</param>
         public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            if(execute == null)
-            {
-                throw new ArgumentNullException("execute");
-            }
-            this.execute = execute;
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
         }
 
@@ -69,5 +65,6 @@ namespace MVVMBase
         {
             execute(parameter);
         }
+
     }
 }

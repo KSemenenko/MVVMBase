@@ -109,7 +109,7 @@ namespace MVVMBase
         /// <summary>
         /// Associates OnPropertyChanged event to properties.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">type</typeparam>
         /// <param name="action">Main property</param>
         /// <param name="actions">Related properties</param>
         public void BindToPropertyChange(string action, params string[] actions)
@@ -136,6 +136,15 @@ namespace MVVMBase
         {
             var stringAction = GetPropertyName(action);
             BindToPropertyChange(stringAction, actions);
+        }
+
+        /// <summary>
+        ///     Raise the property and call the PropertyChanged event.
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
+        public void RaisePropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(propertyName);
         }
 
     }
