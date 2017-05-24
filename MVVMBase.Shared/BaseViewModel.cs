@@ -24,7 +24,7 @@ namespace MVVMBase
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        private void RaisePropertyChanged(string propertyName)
+        private void CallPropertyChangedEvent(string propertyName)
         {
             Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -54,7 +54,7 @@ namespace MVVMBase
         /// <param name="propertyName">Property name</param>
         protected void OnPropertyChanged(string propertyName)
         {
-            RaisePropertyChanged(propertyName);
+            CallPropertyChangedEvent(propertyName);
 
             //bind properties
             List<string> lst;
