@@ -96,7 +96,7 @@ namespace MVVMBaseUnitTest
         }
 
         [TestMethod]
-        public void BindTest()
+        public void BindToPropertyChangeTest()
         {
             var myClass = new BindClass();
             List<string> propertyList = new List<string>();
@@ -111,7 +111,39 @@ namespace MVVMBaseUnitTest
             
             Assert.AreEqual(propertyList.Count,3);
         }
-    }
 
-    
+        [TestMethod]
+        public void BindToTest()
+        {
+            var myClass = new BindClass();
+            List<string> propertyList = new List<string>();
+            myClass.PropertyChanged += (se, ev) => { propertyList.Add(ev.PropertyName); };
+
+            myClass.Bind(nameof(myClass.MyProperty)).To(nameof(myClass.MyCommand));
+
+            myClass.Bind(() => myClass.MyCommand).To(()=> myClass.MyPropertyByName);
+
+            myClass.MyProperty = "string";
+
+            Thread.Sleep(1000);
+
+            Assert.AreEqual(propertyList.Count, 3);
+        }
+
+        [TestMethod]
+        public void NotifyPropertyChangedExtensionText()
+        {
+            var myClass1 = new NotifyPropertyChangedExtensionClass();
+            myClass1.PropertyChanged += (se, ev) => { Assert.AreEqual(ev.PropertyName, "Poperty1"); };
+            myClass1.Poperty1 = "string";
+
+            var myClass2 = new NotifyPropertyChangedExtensionClass();
+            myClass2.PropertyChanged += (se, ev) => { Assert.AreEqual(ev.PropertyName, "Poperty2"); };
+            myClass2.Poperty2 = "string";
+
+            Thread.Sleep(1000);
+            Assert.AreEqual(myClass1.Poperty1, "string");
+            Assert.AreEqual(myClass2.Poperty2, "string");
+        }
+    }
 }
