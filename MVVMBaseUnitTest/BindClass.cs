@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MVVMBase;
+using MVVMBase.Commands;
 
 namespace MVVMBaseUnitTest
 {
@@ -67,11 +68,11 @@ namespace MVVMBaseUnitTest
             }
         }
 
-        public ICommand MyCommand
+        public MvvmCommand MyCommand
         {
             get
             {
-                return new DelegateCommand(executedParam => { MyPropertyByName = (string)executedParam; },
+                return new MvvmCommand(executedParam => { MyPropertyByName = (string)executedParam; },
                     canExecutedParam => MyCommandProperty == "1");
             }
         }
