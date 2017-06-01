@@ -7,8 +7,8 @@
     <ProjectGuid>{22C43546-44B5-457B-814C-B9C7AA017C15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MVVMBase.Desktop.v46</RootNamespace>
-    <AssemblyName>MVVMBase.Desktop.v46</AssemblyName>
+    <RootNamespace>MVVMBase</RootNamespace>
+    <AssemblyName>MVVMBase</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MVVMBase.Desktop.v46.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\MVVMBase.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MVVMBase.Desktop.v46.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\MVVMBase.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

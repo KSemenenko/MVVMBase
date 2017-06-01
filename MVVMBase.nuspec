@@ -22,44 +22,39 @@
   <files>
 
     <!--.NET 3.5-->
-    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.Desktop.v35.dll" target="lib\net35\MVVMBase.Desktop.v35.dll" />
-    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.Desktop.v35.xml" target="lib\net35\MVVMBase.Desktop.v35.xml" />
-    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.Desktop.v35.pdb" target="lib\net35\MVVMBase.Desktop.v35.pdb" />
+    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.dll" target="lib\net35\MVVMBase.dll" />
+    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.xml" target="lib\net35\MVVMBase.xml" />
+    <file src="MVVMBase.Desktop.v35\bin\Release\MVVMBase.pdb" target="lib\net35\MVVMBase.pdb" />
 
     <!--.NET 3.5 client-->
-    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.Desktop.v35client.dll" target="lib\net35-client\MVVMBase.Desktop.v35client.dll" />
-    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.Desktop.v35client.xml" target="lib\net35-client\MVVMBase.Desktop.v35client.xml" />
-    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.Desktop.v35client.pdb" target="lib\net35-client\MVVMBase.Desktop.v35client.pdb" />
+    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.dll" target="lib\net35-client\MVVMBase.dll" />
+    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.xml" target="lib\net35-client\MVVMBase.xml" />
+    <file src="MVVMBase.Desktop.v35client\bin\Release\MVVMBase.pdb" target="lib\net35-client\MVVMBase.pdb" />
 
     <!--.NET 4.0-->
-    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.Desktop.v40.dll" target="lib\net40\MVVMBase.Desktop.v40.dll" />
-    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.Desktop.v40.xml" target="lib\net40\MVVMBase.Desktop.v40.xml" />
-    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.Desktop.v40.pdb" target="lib\net40\MVVMBase.Desktop.v40.pdb" />
+    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.dll" target="lib\net40\MVVMBase.dll" />
+    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.xml" target="lib\net40\MVVMBase.xml" />
+    <file src="MVVMBase.Desktop.v40\bin\Release\MVVMBase.pdb" target="lib\net40\MVVMBase.pdb" />
 
     <!--.NET 4.0 client-->
-    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.Desktop.v40client.dll" target="lib\net40-client\MVVMBase.Desktop.v40client.dll" />
-    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.Desktop.v40client.xml" target="lib\net40-client\MVVMBase.Desktop.v40client.xml" />
-    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.Desktop.v40client.pdb" target="lib\net40-client\MVVMBase.Desktop.v40client.pdb" />
+    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.dll" target="lib\net40-client\MVVMBase.dll" />
+    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.xml" target="lib\net40-client\MVVMBase.xml" />
+    <file src="MVVMBase.Desktop.v40client\bin\Release\MVVMBase.pdb" target="lib\net40-client\MVVMBase.pdb" />
 
     <!--.NET 4.5-->
-    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.Desktop.v45.dll" target="lib\net45\MVVMBase.Desktop.v45.dll" />
-    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.Desktop.v45.xml" target="lib\net45\MVVMBase.Desktop.v45.xml" />
-    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.Desktop.v45.pdb" target="lib\net45\MVVMBase.Desktop.v45.pdb" />
+    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.dll" target="lib\net45\MVVMBase.dll" />
+    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.xml" target="lib\net45\MVVMBase.xml" />
+    <file src="MVVMBase.Desktop.v45\bin\Release\MVVMBase.pdb" target="lib\net45\MVVMBase.pdb" />
 
     <!--.NET 4.6-->
-    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.Desktop.v46.dll" target="lib\net46\MVVMBase.Desktop.v46.dll" />
-    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.Desktop.v46.xml" target="lib\net46\MVVMBase.Desktop.v46.xml" />
-    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.Desktop.v46.pdb" target="lib\net46\MVVMBase.Desktop.v46.pdb" />
+    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.dll" target="lib\net46\MVVMBase.dll" />
+    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.xml" target="lib\net46\MVVMBase.xml" />
+    <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.pdb" target="lib\net46\MVVMBase.pdb" />
     
     <!--Portable-->
-    <file src="MVVMBase.Portable\bin\Release\MVVMBase.Portable.dll" target="lib\portable-net45+wp8+wpa81+win8+Xamarin.iOS10+MonoAndroid10+MonoTouch10\MVVMBase.Portable.dll" />
-    <file src="MVVMBase.Portable\bin\Release\MVVMBase.Portable.xml" target="lib\portable-net45+wp8+wpa81+win8+Xamarin.iOS10+MonoAndroid10+MonoTouch10\MVVMBase.Portable.xml" />
-    <file src="MVVMBase.Portable\bin\Release\MVVMBase.Portable.pdb" target="lib\portable-net45+wp8+wpa81+win8+Xamarin.iOS10+MonoAndroid10+MonoTouch10\MVVMBase.Portable.pdb" />
-
-    <!--UWP-->
-    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.dll" target="lib\UAP10\MVVMBase.UWP.dll" />
-    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.xml" target="lib\UAP10\MVVMBase.UWP.xml" />
-    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.pdb" target="lib\UAP10\MVVMBase.UWP.pdb" />  
-    
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.dll" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\MVVMBase.dll" />
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.xml" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\MVVMBase.xml" />
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.pdb" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\MVVMBase.pdb" />
+   
   </files>
 </package>

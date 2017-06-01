@@ -7,8 +7,8 @@
     <ProjectGuid>{C21D979F-0BE4-46BD-A11B-8D9FDDC77965}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MVVMBase.Desktop.v35client</RootNamespace>
-    <AssemblyName>MVVMBase.Desktop.v35client</AssemblyName>
+    <RootNamespace>MVVMBase</RootNamespace>
+    <AssemblyName>MVVMBase</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MVVMBase.Desktop.v35client.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\MVVMBase.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MVVMBase.Desktop.v35client.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\MVVMBase.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -48,7 +48,7 @@
     <Compile Include="..\MVVMBase.Desktop.v40\DelegateCommand.cs">
       <Link>DelegateCommand.cs</Link>
     </Compile>
-	<Compile Include="..\MVVMBase.Shared\SharedAssemblyInfo.cs">
+    <Compile Include="..\MVVMBase.Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

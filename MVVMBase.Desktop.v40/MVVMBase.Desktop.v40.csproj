@@ -7,8 +7,8 @@
     <ProjectGuid>{640AECB2-A92F-4255-A70E-9E79EE1B4930}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MVVMBase.Desktop.v40</RootNamespace>
-    <AssemblyName>MVVMBase.Desktop.v40</AssemblyName>
+    <RootNamespace>MVVMBase</RootNamespace>
+    <AssemblyName>MVVMBase</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MVVMBase.Desktop.v40.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\MVVMBase.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MVVMBase.Desktop.v40.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\MVVMBase.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -42,7 +42,7 @@
     <Compile Include="BaseCommand.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
-	<Compile Include="..\MVVMBase.Shared\SharedAssemblyInfo.cs">
+    <Compile Include="..\MVVMBase.Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
