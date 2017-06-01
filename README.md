@@ -4,6 +4,11 @@ This is a small library that uses pattern MVVM for a handy use in WPF and Xamari
 ## Available at NuGet. 
 https://www.nuget.org/packages/ksemenenko.MVVMBase/
 
+### Build status
+[![Build status](https://ci.appveyor.com/api/projects/status/5lckjbd45no96f4c?svg=true)](https://ci.appveyor.com/project/KSemenenko/mvvmbase)
+[![Build status](https://ci.appveyor.com/api/projects/status/5lckjbd45no96f4c/branch/master?svg=true)](https://ci.appveyor.com/project/KSemenenko/mvvmbase/branch/master)
+
+
 ## Example use:
 ```cs
 public class ModelClass : BaseViewModel
