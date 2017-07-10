@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>ksemenenko.MVVMBase </id>
-    <version>1.4.0.0</version>
+    <version>1.4.0.1</version>
     <title>MVVMBase Mini Framework</title>
     <authors>ksemenenko</authors>
     <owners>ksemenenko</owners>
@@ -52,9 +52,24 @@
     <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.pdb" target="lib\net46\MVVMBase.pdb" />
     
     <!--Portable-->
-    <file src="MVVMBase.Portable\bin\Release\MVVMBase.dll" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\MVVMBase.dll" />
-    <file src="MVVMBase.Portable\bin\Release\MVVMBase.xml" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\MVVMBase.xml" />
-    <file src="MVVMBase.Portable\bin\Release\MVVMBase.pdb" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\MVVMBase.pdb" />
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.dll" target="lib\portable-win+net45+wp80+win81+wpa81+xamarinmac20\MVVMBase.dll" />
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.xml" target="lib\portable-win+net45+wp80+win81+wpa81+xamarinmac20\MVVMBase.xml" />
+    <file src="MVVMBase.Portable\bin\Release\MVVMBase.pdb" target="lib\portable-win+net45+wp80+win81+wpa81+xamarinmac20\MVVMBase.pdb" />
+    
+    <!--Xamarin.Android-->
+    <file src="MVVMBase.Android\bin\Release\MVVMBase.Android.dll" target="lib\MonoAndroid10\MVVMBase.Android.dll" />
+    <file src="MVVMBase.Android\bin\Release\MVVMBase.Android.xml" target="lib\MonoAndroid10\MVVMBase.Android.xml" />
+    <file src="MVVMBase.Android\bin\Release\MVVMBase.Android.pdb" target="lib\MonoAndroid10\MVVMBase.Android.pdb" />
+
+    <!--Xamarin.iOS-->
+    <file src="MVVMBase.iOS\bin\Release\MVVMBase.iOS.dll" target="lib\Xamarin.iOS10\MVVMBase.iOS.dll" />
+    <file src="MVVMBase.iOS\bin\Release\MVVMBase.iOS.xml" target="lib\Xamarin.iOS10\MVVMBase.iOS.xml" />
+    <file src="MVVMBase.iOS\bin\Release\MVVMBase.iOS.pdb" target="lib\Xamarin.iOS10\MVVMBase.iOS.pdb" />
+
+    <!--UWP-->
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.dll" target="lib\UAP10\MVVMBase.UWP.dll" />
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.xml" target="lib\UAP10\MVVMBase.UWP.xml" />
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.pdb" target="lib\UAP10\MVVMBase.UWP.pdb" />
    
   </files>
 </package>

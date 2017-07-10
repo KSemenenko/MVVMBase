@@ -13,7 +13,7 @@ namespace MVVMBase
     /// <summary>
     ///     Base View Model
     /// </summary>
-    public class BaseViewModel : INotifyPropertyChanged
+    public partial class BaseViewModel : INotifyPropertyChanged
     {
         private readonly Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>();
         private string bindPropertyName;
@@ -23,10 +23,29 @@ namespace MVVMBase
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private Action<Action> runOnUiThread;
+
+        partial void SetUiThread();
+
+
+        /// <summary>
+        /// Create BaseViewModel
+        /// </summary>
+        public BaseViewModel()
+        {
+            SetUiThread();
+        }
 
         private void CallPropertyChangedEvent(string propertyName)
         {
-            Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if(runOnUiThread != null)
+            {
+                runOnUiThread(() => Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName)));
+            }
+            else
+            {
+                Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>
