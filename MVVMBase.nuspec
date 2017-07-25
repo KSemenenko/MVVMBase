@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>ksemenenko.MVVMBase </id>
-    <version>1.4.0.1</version>
+    <version>1.4.0.4</version>
     <title>MVVMBase Mini Framework</title>
     <authors>ksemenenko</authors>
     <owners>ksemenenko</owners>
@@ -67,9 +67,11 @@
     <file src="MVVMBase.iOS\bin\Release\MVVMBase.iOS.pdb" target="lib\Xamarin.iOS10\MVVMBase.iOS.pdb" />
 
     <!--UWP-->
-    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.dll" target="lib\UAP10\MVVMBase.UWP.dll" />
-    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.xml" target="lib\UAP10\MVVMBase.UWP.xml" />
-    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.pdb" target="lib\UAP10\MVVMBase.UWP.pdb" />
-   
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.dll" target="lib\UAP10.0\MVVMBase.UWP.dll" />
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.xml" target="lib\UAP10.0\MVVMBase.UWP.xml" />
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.pdb" target="lib\UAP10.0\MVVMBase.UWP.pdb" />
+    <file src="MVVMBase.UWP\bin\Release\MVVMBase.UWP.pri" target="lib\UAP10.0\MVVMBase.UWP.pri" />
+
+
   </files>
 </package>
