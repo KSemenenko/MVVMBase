@@ -58,6 +58,18 @@ namespace MVVMBaseUnitTest
         }
 
         [TestMethod]
+        public void MyPropertyAutoGetSetTest()
+        {
+            var myClass = new ModelClass();
+
+            myClass.PropertyChanged += (se, ev) => { Assert.AreEqual(ev.PropertyName, "MyPropertyAutoGetSet"); };
+
+            myClass.MyPropertyAutoGetSet = "string";
+            Thread.Sleep(1000);
+            Assert.AreEqual(myClass.MyPropertyAutoGetSet, "string");
+        }
+
+        [TestMethod]
         public void MyCommandTest()
         {
             var myClass = new ModelClass();
@@ -92,18 +104,18 @@ namespace MVVMBaseUnitTest
             myClass.UpdateAll();
 
             Thread.Sleep(1000);
-            Assert.AreEqual(count, 6); // 4 properties and 2 commands
+            Assert.AreEqual(count, 7); // 5 properties and 2 commands
         }
 
         [TestMethod]
-        public void BindToPropertyChangeTest()
+        public void ChangedObjectNotifyPropertyChangeTest()
         {
             var myClass = new BindClass();
             List<string> propertyList = new List<string>();
             myClass.PropertyChanged += (se, ev) => {propertyList.Add(ev.PropertyName);};
 
-            myClass.BindToPropertyChange(nameof(myClass.MyProperty), nameof(myClass.MyCommand));
-            myClass.BindToPropertyChange(() => myClass.MyCommand, nameof(myClass.MyPropertyByName));
+            myClass.ChangedObjectNotifyPropertyChange(nameof(myClass.MyProperty), nameof(myClass.MyCommand));
+            myClass.ChangedObjectNotifyPropertyChange(() => myClass.MyCommand, nameof(myClass.MyPropertyByName));
 
             myClass.MyProperty = "string";
 
@@ -113,21 +125,43 @@ namespace MVVMBaseUnitTest
         }
 
         [TestMethod]
-        public void BindToTest()
+        public void DependsToTest()
         {
             var myClass = new BindClass();
             List<string> propertyList = new List<string>();
             myClass.PropertyChanged += (se, ev) => { propertyList.Add(ev.PropertyName); };
 
-            myClass.Bind(nameof(myClass.MyProperty)).To(nameof(myClass.MyCommand));
+            myClass.ChangedObject(nameof(myClass.MyProperty)).Notify(nameof(myClass.MyCommand));
 
-            myClass.Bind(() => myClass.MyCommand).To(()=> myClass.MyPropertyByName);
+            myClass.ChangedObject(() => myClass.MyCommand).Notify(()=> myClass.MyPropertyByName);
 
             myClass.MyProperty = "string";
 
             Thread.Sleep(1000);
 
             Assert.AreEqual(propertyList.Count, 3);
+        }
+
+        [TestMethod]
+        public void DependsAttributeTest()
+        {
+            var myClass = new BindClass();
+            List<string> propertyList = new List<string>();
+            myClass.PropertyChanged += (se, ev) => { propertyList.Add(ev.PropertyName); };
+
+            Assert.AreEqual(myClass.MyDependCommand.CanExecute(null), false);
+            
+            myClass.MyDependProperty = "1";
+
+            Thread.Sleep(200);
+
+            Assert.AreEqual(myClass.MyDependCommand.CanExecute(null), true);
+
+            myClass.MyDependProperty = "2";
+
+            Thread.Sleep(200);
+
+            Assert.AreEqual(myClass.MyDependCommand.CanExecute(null), false);
         }
 
         [TestMethod]

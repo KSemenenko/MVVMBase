@@ -56,6 +56,12 @@ namespace MVVMBaseUnitTest
         {
             get { return myPropertyAutoChange; }
             set { SetProperty(ref myPropertyAutoChange, value); }
+
+        }
+        public string MyPropertyAutoGetSet
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value);}
         }
 
         public string MyPropertyByMemberName
@@ -68,12 +74,28 @@ namespace MVVMBaseUnitTest
             }
         }
 
+        [DependsOn(nameof(MyDependCommand))]
+        public string MyDependProperty
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
+        }
+
         public MvvmCommand MyCommand
         {
             get
             {
                 return new MvvmCommand(executedParam => { MyPropertyByName = (string)executedParam; },
                     canExecutedParam => MyCommandProperty == "1");
+            }
+        }
+
+        public MvvmCommand MyDependCommand
+        {
+            get
+            {
+                return new MvvmCommand(executedParam => { MyPropertyByName = (string)executedParam; },
+                    canExecutedParam => MyDependProperty == "1");
             }
         }
 

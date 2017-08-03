@@ -59,6 +59,12 @@ namespace MVVMBaseUnitTest
             set { SetProperty(ref myPropertyAutoChange, value); }
         }
 
+        public string MyPropertyAutoGetSet
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
+        }
+
         public string MyPropertyByMemberName
         {
             get { return myPropertyByMemberName; }

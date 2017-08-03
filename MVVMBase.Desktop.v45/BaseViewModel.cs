@@ -10,7 +10,11 @@ namespace MVVMBase
     {
         partial void SetUiThread()
         {
-            runOnUiThread = (action) => { Application.Current.Dispatcher.Invoke(action); };
+            var dispather = Application.Current?.Dispatcher;
+            if(dispather != null)
+            {
+                runOnUiThread = (action) => { dispather?.Invoke(action); };
+            }
         }
     }
 }

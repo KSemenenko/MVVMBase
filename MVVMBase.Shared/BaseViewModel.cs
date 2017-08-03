@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Reflection;
 
 namespace MVVMBase
 {
@@ -15,26 +15,28 @@ namespace MVVMBase
     /// </summary>
     public partial class BaseViewModel : INotifyPropertyChanged
     {
+        private readonly Dictionary<string, object> _storage = new Dictionary<string, object>();
         private readonly Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>();
         private string bindPropertyName;
+
+        private Action<Action> runOnUiThread;
+
+        /// <summary>
+        ///     Create BaseViewModel
+        /// </summary>
+        public BaseViewModel()
+        {
+            SetUiThread();
+            // Update property dependencies
+            ResolvePropertyDependencies();
+        }
 
         /// <summary>
         ///     Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Action<Action> runOnUiThread;
-
         partial void SetUiThread();
-
-
-        /// <summary>
-        /// Create BaseViewModel
-        /// </summary>
-        public BaseViewModel()
-        {
-            SetUiThread();
-        }
 
         private void CallPropertyChangedEvent(string propertyName)
         {
@@ -57,7 +59,6 @@ namespace MVVMBase
         {
             var propertyName = GetPropertyName(action);
             OnPropertyChanged(propertyName);
-
         }
 
         private static string GetPropertyName<T>(Expression<Func<T>> action)
@@ -76,7 +77,7 @@ namespace MVVMBase
             CallPropertyChangedEvent(propertyName);
 
             //bind properties
-            if (bindDictionary.TryGetValue(propertyName, out var lst))
+            if(bindDictionary.TryGetValue(propertyName, out var lst))
             {
                 foreach(var item in lst)
                 {
@@ -95,7 +96,6 @@ namespace MVVMBase
             {
                 OnPropertyChanged(name);
             }
-            
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace MVVMBase
         /// </summary>
         protected void OnPropertyChangedForAll()
         {
-            foreach (PropertyInfo item in GetType().GetTypeInfo().DeclaredProperties)
+            foreach(var item in GetType().GetTypeInfo().DeclaredProperties)
             {
                 OnPropertyChanged(item.Name);
             }
@@ -131,64 +131,183 @@ namespace MVVMBase
             OnPropertyChanged(propertyName);
         }
 
+        /// <summary>
+        ///     Sets a value in viewmodel storage and raises property changed if value has changed
+        /// </summary>
+        /// <param name="propertyName">Name.</param>
+        /// <param name="value">Value.</param>
+        /// <typeparam name="TValueType">The 1st type parameter.</typeparam>
+        protected bool SetValue<TValueType>(TValueType value, [CallerMemberName] string propertyName = null)
+        {
+            SetObjectForKey(propertyName, value);
+            OnPropertyChanged(propertyName);
+
+            return true;
+        }
 
         /// <summary>
-        /// Set property to bind.
+        ///     Returns a value from the viewmodel storage
+        /// </summary>
+        /// <returns>The value.</returns>
+        /// <param name="property">Name.</param>
+        /// <typeparam name="TValueType">The 1st type parameter.</typeparam>
+        protected TValueType GetValue<TValueType>([CallerMemberName] string property = null)
+        {
+            return GetValue(() => default(TValueType), property);
+        }
+
+        /// <summary>
+        ///     Returns a value from the viewmodel storage
+        /// </summary>
+        protected TValueType GetValue<TValueType>(Func<TValueType> defaultValueFunc, [CallerMemberName] string propertyName = null)
+        {
+            if(string.IsNullOrEmpty(propertyName))
+            {
+                throw new ArgumentException("propertyName");
+            }
+
+            return GetObjectForKey(propertyName, defaultValueFunc());
+        }
+
+        /// <summary>
+        ///     Sets the object for key.
+        /// </summary>
+        /// <param name="key">Key.</param>
+        /// <param name="value">Value.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        protected void SetObjectForKey<T>(string key, T value)
+        {
+            if(_storage.ContainsKey(key))
+            {
+                _storage[key] = value;
+            }
+            else
+            {
+                _storage.Add(key, value);
+            }
+        }
+
+        /// <summary>
+        ///     Gets the object for key.
+        /// </summary>
+        /// <returns>The object for key.</returns>
+        /// <param name="key">Key.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        protected T GetObjectForKey<T>(string key, T defaultValue)
+        {
+            if(string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException("key");
+            }
+
+            if(!_storage.ContainsKey(key))
+            {
+                if(defaultValue == null)
+                {
+                    return defaultValue;
+                }
+
+                SetObjectForKey(key, defaultValue);
+            }
+
+            try
+            {
+                return (T)Convert.ChangeType(_storage[key], typeof(T));
+            }
+            catch
+            {
+                return (T)_storage[key];
+            }
+        }
+
+        private void ResolvePropertyDependencies()
+        {
+            
+            foreach(var dependantPropertyInfo in GetType().GetRuntimeProperties())
+            {
+                // Check for DependsOnAttribute
+                var dependsOnAttribute = dependantPropertyInfo.GetCustomAttribute<DependsOnAttribute>();
+                if(dependsOnAttribute == null)
+                {
+                    continue;
+                }
+
+                foreach(var property in dependsOnAttribute.SourceProperties)
+                {
+                    ChangedObject(dependantPropertyInfo.Name).Notify(property);
+                }
+            }
+            
+        }
+
+        /// <summary>
+        ///     Raise the property and call the PropertyChanged event.
         /// </summary>
         /// <param name="propertyName">Property name</param>
-        public BaseViewModel Bind(string propertyName)
+        public void RaisePropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(propertyName);
+        }
+
+        #region
+
+        /// <summary>
+        ///     Set property to ChangedObject.
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
+        public BaseViewModel ChangedObject(string propertyName)
         {
             bindPropertyName = propertyName;
             return this;
         }
 
         /// <summary>
-        /// Set property to bind.
+        ///     Set property to ChangedObject.
         /// </summary>
         /// <param name="propertyName">Property name</param>
-        public BaseViewModel Bind<T>(Expression<Func<T>> propertyName)
+        public BaseViewModel ChangedObject<T>(Expression<Func<T>> propertyName)
         {
             bindPropertyName = GetPropertyName(propertyName);
             return this;
         }
 
         /// <summary>
-        /// Bind to property.
+        ///     Depends to property.
         /// </summary>
         /// <param name="propertyName">Property name</param>
-        public BaseViewModel To(string propertyName)
+        public BaseViewModel Notify(string propertyName)
         {
-            if (string.IsNullOrEmpty(bindPropertyName))
+            if(string.IsNullOrEmpty(bindPropertyName))
             {
                 throw new ArgumentException("Bind property not set.");
             }
 
-            BindToPropertyChange(bindPropertyName, propertyName);
+            ChangedObjectNotifyPropertyChange(bindPropertyName, propertyName);
             return this;
         }
 
         /// <summary>
-        /// Bind to property.
+        ///     Depends to property.
         /// </summary>
         /// <param name="propertyName">Property name</param>
-        public BaseViewModel To<T>(Expression<Func<T>> propertyName)
+        public BaseViewModel Notify<T>(Expression<Func<T>> propertyName)
         {
-            if (string.IsNullOrEmpty(bindPropertyName))
+            if(string.IsNullOrEmpty(bindPropertyName))
             {
-                throw new ArgumentException("Bind property not set.");
+                throw new ArgumentException("Depends property not set.");
             }
 
-            BindToPropertyChange(bindPropertyName, GetPropertyName(propertyName));
+            ChangedObjectNotifyPropertyChange(bindPropertyName, GetPropertyName(propertyName));
             return this;
         }
 
         /// <summary>
-        /// Associates OnPropertyChanged event to properties.
+        ///     Associates OnPropertyChanged event to properties.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName">Main property</param>
         /// <param name="actions">Related properties</param>
-        public void BindToPropertyChange(string propertyName, params string[] actions)
+        public void ChangedObjectNotifyPropertyChange(string propertyName, params string[] actions)
         {
             List<string> list;
             if(bindDictionary.TryGetValue(propertyName, out list))
@@ -203,25 +322,17 @@ namespace MVVMBase
         }
 
         /// <summary>
-        /// Associates OnPropertyChanged event to properties.
+        ///     Associates OnPropertyChanged event to properties.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName">Main property</param>
         /// <param name="propertyNames">Related properties</param>
-        public void BindToPropertyChange<T>(Expression<Func<T>> propertyName, params string[] propertyNames)
+        public void ChangedObjectNotifyPropertyChange<T>(Expression<Func<T>> propertyName, params string[] propertyNames)
         {
             var stringAction = GetPropertyName(propertyName);
-            BindToPropertyChange(stringAction, propertyNames);
+            ChangedObjectNotifyPropertyChange(stringAction, propertyNames);
         }
 
-        /// <summary>
-        ///     Raise the property and call the PropertyChanged event.
-        /// </summary>
-        /// <param name="propertyName">Property name</param>
-        public void RaisePropertyChanged(string propertyName)
-        {
-            OnPropertyChanged(propertyName);
-        }
-
+        #endregion
     }
 }
