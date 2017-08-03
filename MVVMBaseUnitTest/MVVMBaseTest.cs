@@ -94,6 +94,30 @@ namespace MVVMBaseUnitTest
         }
 
         [TestMethod]
+        public void MyAsyncCommandTest()
+        {
+            var myClass = new ModelClass();
+
+            myClass.MyCommandProperty = "1";
+            Assert.AreEqual(myClass.MyAsyncCommand.CanExecute(null), true);
+            myClass.MyCommand.Execute("1");
+            Assert.AreEqual(myClass.MyPropertyByName, "1");
+
+            myClass.MyCommandProperty = "2";
+            Assert.AreEqual(myClass.MyAsyncCommand.CanExecute(null), false);
+            myClass.MyCommand.Execute("2");
+            Assert.AreEqual(myClass.MyPropertyByName, "2");
+
+            myClass.MyCommandProperty = "1";
+            myClass.MyCommand.Run("3");
+            Assert.AreEqual(myClass.MyPropertyByName, "3");
+
+            myClass.MyCommandProperty = "2";
+            myClass.MyCommand.Run("4");
+            Assert.AreEqual(myClass.MyPropertyByName, "3");
+        }
+
+        [TestMethod]
         public void AllOnPropertyChanged()
         {
             var myClass = new ModelClass();
@@ -104,7 +128,7 @@ namespace MVVMBaseUnitTest
             myClass.UpdateAll();
 
             Thread.Sleep(1000);
-            Assert.AreEqual(count, 7); // 5 properties and 2 commands
+            Assert.AreEqual(count, 8); // 5 properties and 3 commands
         }
 
         [TestMethod]

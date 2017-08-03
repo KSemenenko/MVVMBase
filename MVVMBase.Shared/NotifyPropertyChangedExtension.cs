@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -7,7 +6,7 @@ using System.Threading;
 namespace MVVMBase
 {
     /// <summary>
-    /// BaseViewModelExtension
+    ///     BaseViewModelExtension
     /// </summary>
     public static class NotifyPropertyChangedExtension
     {
@@ -17,7 +16,7 @@ namespace MVVMBase
         }
 
         /// <summary>
-        /// Changes the property and call the PropertyChanged even
+        ///     Changes the property and call the PropertyChanged even
         /// </summary>
         /// <param name="notifyPropertyChanged">INotifyPropertyChanged</param>
         /// <param name="eventHandler">PropertyChangedEventHandler</param>
@@ -31,7 +30,8 @@ namespace MVVMBase
         ///     Changes the property and call the PropertyChanged event for this property name.
         /// </summary>
         [SuppressMessage("ReSharper", "MethodOverloadWithOptionalParameter")]
-        public static void RaiseOnPropertyChanged(this INotifyPropertyChanged notifyPropertyChanged, PropertyChangedEventHandler eventHandler, [CallerMemberName] string hiddenPropertyName = null, bool hiddenCallMemberName = true)
+        public static void RaiseOnPropertyChanged(this INotifyPropertyChanged notifyPropertyChanged, PropertyChangedEventHandler eventHandler,
+            [CallerMemberName] string hiddenPropertyName = null, bool hiddenCallMemberName = true)
         {
             RaisePropertyChanged(eventHandler, notifyPropertyChanged, hiddenPropertyName);
         }
@@ -41,7 +41,7 @@ namespace MVVMBase
         /// </summary>
         public static void RaiseOnPropertyChanged(this INotifyPropertyChanged notifyPropertyChanged, PropertyChangedEventHandler eventHandler, params string[] propertyNames)
         {
-            foreach (var name in propertyNames)
+            foreach(var name in propertyNames)
             {
                 RaisePropertyChanged(eventHandler, notifyPropertyChanged, name);
             }

@@ -12,14 +12,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\DependsOnAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotifyPropertyChangedExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\MvvmCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Collections\ObservableCollectionWithAddRange.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SharedAssemblyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Commands\BaseCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Commands\DelegateCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\BaseMvvmCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Commands\" />
     <Folder Include="$(MSBuildThisFileDirectory)Collections\" />
     <Folder Include="$(MSBuildThisFileDirectory)Attributes\" />
   </ItemGroup>

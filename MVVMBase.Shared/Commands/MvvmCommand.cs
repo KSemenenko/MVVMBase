@@ -6,13 +6,21 @@ namespace MVVMBase.Commands
     /// <summary>
     ///     Provides a simple ICommand implementation.
     /// </summary>
-    public class MvvmCommand : DelegateCommand
+    public class MvvmCommand : BaseMvvmCommand
     {
         /// <summary>
         ///     Initializes a new instance of the  class.
         /// </summary>
         /// <param name="execute">The execute action.</param>
-        public MvvmCommand(Action<object> execute) : base(execute, null)
+        public MvvmCommand(Action<object> execute) : base(execute)
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the  class.
+        /// </summary>
+        /// <param name="execute">The execute action.</param>
+        public MvvmCommand(Func<object, Task> execute) : base(execute)
         {
         }
 
@@ -25,11 +33,19 @@ namespace MVVMBase.Commands
         {
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the  class.
+        /// </summary>
+        /// <param name="execute">The execute action.</param>
+        /// <param name="canExecute">The can execute predicate.</param>
+        public MvvmCommand(Func<object, Task> execute, Predicate<object> canExecute) : base(execute, canExecute)
+        {
+        }
 
         #region Run
 
         /// <summary>
-        /// Calls a command checking CanExecute method
+        ///     Calls a command checking CanExecute method
         /// </summary>
         public void Run()
         {
@@ -40,7 +56,7 @@ namespace MVVMBase.Commands
         }
 
         /// <summary>
-        /// Calls a command checking CanExecute method
+        ///     Calls a command checking CanExecute method
         /// </summary>
         /// <param name="parameter">
         ///     Data used by the command. If the command does not require data to be passed, this object can be
@@ -55,7 +71,7 @@ namespace MVVMBase.Commands
         }
 
         /// <summary>
-        /// Calls a command checking CanExecute method
+        ///     Calls a command checking CanExecute method
         /// </summary>
         /// <param name="parameter">
         ///     Data used by the command. If the command does not require data to be passed, this object can be
@@ -76,14 +92,15 @@ namespace MVVMBase.Commands
         #endregion
 
         #region RunAsync
+
         /// <summary>
-        /// Calls a command checking CanExecute method
+        ///     Calls a command checking CanExecute method
         /// </summary>
         public Task RunAsync()
         {
             return Task.Run(() =>
             {
-                if (CanExecute(null))
+                if(CanExecute(null))
                 {
                     Execute(null);
                 }
@@ -91,7 +108,7 @@ namespace MVVMBase.Commands
         }
 
         /// <summary>
-        /// Calls a command checking CanExecute method
+        ///     Calls a command checking CanExecute method
         /// </summary>
         /// <param name="parameter">
         ///     Data used by the command. If the command does not require data to be passed, this object can be
@@ -99,9 +116,17 @@ namespace MVVMBase.Commands
         /// </param>
         public Task RunAsync(object parameter)
         {
-            return Task.Run(() =>
+            if(IsAsync)
             {
                 if (CanExecute(null))
+                {
+                    return ExecuteAsync(parameter);
+                }
+            }
+
+            return Task.Run(() =>
+            {
+                if(CanExecute(null))
                 {
                     Execute(parameter);
                 }
@@ -109,7 +134,7 @@ namespace MVVMBase.Commands
         }
 
         /// <summary>
-        /// Calls a command checking CanExecute method
+        ///     Calls a command checking CanExecute method
         /// </summary>
         /// <param name="parameter">
         ///     Data used by the command. If the command does not require data to be passed, this object can be
@@ -121,14 +146,23 @@ namespace MVVMBase.Commands
         /// </param>
         public Task RunAsync(object parameter, object executeParameter)
         {
-            return Task.Run(() =>
+            if (IsAsync)
             {
                 if (CanExecute(executeParameter))
+                {
+                    return ExecuteAsync(parameter);
+                }
+            }
+
+            return Task.Run(() =>
+            {
+                if(CanExecute(executeParameter))
                 {
                     Execute(parameter);
                 }
             });
         }
+
         #endregion
     }
 }

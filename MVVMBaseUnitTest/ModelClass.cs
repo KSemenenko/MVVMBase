@@ -84,6 +84,20 @@ namespace MVVMBaseUnitTest
             }
         }
 
+        public MvvmCommand MyAsyncCommand
+        {
+            get
+            {
+                return new MvvmCommand(executedParam =>
+                    {
+                        
+                        MyPropertyByName = (string)executedParam;
+                        return Task.Delay(500);
+                    },
+                    canExecutedParam => MyCommandProperty == "1");
+            }
+        }
+
         public void UpdateAll()
         {
             OnPropertyChangedForAll();
