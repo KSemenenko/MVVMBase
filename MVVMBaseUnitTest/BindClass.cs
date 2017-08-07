@@ -74,12 +74,23 @@ namespace MVVMBaseUnitTest
             }
         }
 
-        [DependsOn(nameof(MyDependCommand))]
+        [Notify(nameof(MyDependCommand))]
         public string MyDependProperty
         {
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
+
+
+
+        public int MyPropertyIntAutoGetSet
+        {
+            get { return GetValue<int>(); }
+            set { SetValue(value); }
+        }
+
+        [DependsOn(nameof(MyPropertyIntAutoGetSet))]
+        public int MyDependedPropertyInt => MyPropertyIntAutoGetSet * MyPropertyIntAutoGetSet;
 
         public MvvmCommand MyCommand
         {

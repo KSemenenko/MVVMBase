@@ -128,7 +128,7 @@ namespace MVVMBaseUnitTest
             myClass.UpdateAll();
 
             Thread.Sleep(1000);
-            Assert.AreEqual(count, 8); // 5 properties and 3 commands
+            Assert.AreEqual(count, 9); // 6 properties and 3 commands
         }
 
         [TestMethod]
@@ -167,25 +167,37 @@ namespace MVVMBaseUnitTest
         }
 
         [TestMethod]
-        public void DependsAttributeTest()
+        public void NotifyToTest()
         {
             var myClass = new BindClass();
             List<string> propertyList = new List<string>();
             myClass.PropertyChanged += (se, ev) => { propertyList.Add(ev.PropertyName); };
 
-            Assert.AreEqual(myClass.MyDependCommand.CanExecute(null), false);
+            myClass.ChangedObject(nameof(myClass.MyProperty)).Notify(nameof(myClass.MyCommand));
+
+            myClass.ChangedObject(() => myClass.MyCommand).Notify(() => myClass.MyPropertyByName);
+
+            myClass.MyProperty = "string";
+
+            Thread.Sleep(1000);
+
+            Assert.AreEqual(propertyList.Count, 3);
+        }
+
+        [TestMethod]
+        public void DependOnAttributeTest()
+        {
+            var myClass = new BindClass();
+            List<string> propertyList = new List<string>();
+            myClass.PropertyChanged += (se, ev) =>
+            {
+                propertyList.Add(ev.PropertyName);
+                Assert.AreEqual(ev.PropertyName, "MyPropertyIntAutoGetSet");
+            };
+            myClass.MyPropertyIntAutoGetSet = 10; 
+            Assert.AreEqual(propertyList.Count, 1);
+            Assert.AreEqual(myClass.MyDependedPropertyInt, myClass.MyPropertyIntAutoGetSet * myClass.MyPropertyIntAutoGetSet);
             
-            myClass.MyDependProperty = "1";
-
-            Thread.Sleep(200);
-
-            Assert.AreEqual(myClass.MyDependCommand.CanExecute(null), true);
-
-            myClass.MyDependProperty = "2";
-
-            Thread.Sleep(200);
-
-            Assert.AreEqual(myClass.MyDependCommand.CanExecute(null), false);
         }
 
         [TestMethod]

@@ -28,7 +28,7 @@ namespace MVVMBase
         {
             SetUiThread();
             // Update property dependencies
-            ResolvePropertyDependencies();
+            ResolvePropertyAttribute();
         }
 
         /// <summary>
@@ -220,25 +220,38 @@ namespace MVVMBase
             }
         }
 
-        private void ResolvePropertyDependencies()
+        private void ResolvePropertyAttribute()
         {
             
             foreach(var dependantPropertyInfo in GetType().GetRuntimeProperties())
             {
-                // Check for DependsOnAttribute
-                var dependsOnAttribute = dependantPropertyInfo.GetCustomAttribute<DependsOnAttribute>();
-                if(dependsOnAttribute == null)
+                // Check for NotifyAttribute
+                var notifyAttribute = dependantPropertyInfo.GetCustomAttribute<NotifyAttribute>();
+                if(notifyAttribute == null)
                 {
                     continue;
                 }
 
-                foreach(var property in dependsOnAttribute.SourceProperties)
+                foreach(var property in notifyAttribute.SourceProperties)
                 {
                     ChangedObject(dependantPropertyInfo.Name).Notify(property);
+                }
+
+                // Check for DependsOnAttribute
+                var dependsOnAttribute = dependantPropertyInfo.GetCustomAttribute<DependsOnAttribute>();
+                if (dependsOnAttribute == null)
+                {
+                    continue;
+                }
+
+                foreach (var property in dependsOnAttribute.SourceProperties)
+                {
+                    ChangedObject(property).Notify(dependantPropertyInfo.Name);
                 }
             }
             
         }
+
 
         /// <summary>
         ///     Raise the property and call the PropertyChanged event.

@@ -9,6 +9,7 @@
     <Import_RootNamespace>MVVMBase</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NotifyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\DependsOnAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotifyPropertyChangedExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\MvvmCommand.cs" />
@@ -18,6 +19,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Collections\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Attributes\" />
   </ItemGroup>
 </Project>
