@@ -28,9 +28,10 @@ namespace MVVMBase
         /// </summary>
         public BaseViewModel()
         {
-            SetUiThread();
             // Update property dependencies
-            ResolvePropertyAttribute();
+            ResolvePropertyAttributes();
+
+            SetUiThread();
         }
 
         /// <summary>
@@ -248,27 +249,30 @@ namespace MVVMBase
             }
         }
 
-        private void ResolvePropertyAttribute()
+        /// <summary>
+        /// Resolve Property Attributes
+        /// </summary>
+        protected void ResolvePropertyAttributes()
         {
             foreach(var dependantPropertyInfo in GetType().GetRuntimeProperties())
             {
                 // Check for NotifyAttribute
-                var notifyAttribute = dependantPropertyInfo.GetCustomAttribute<NotifyAttribute>();
+                var notifyAttribute = dependantPropertyInfo.GetCustomAttribute<NotifyPropertyAttribute>();
                 if(notifyAttribute != null)
                 {
                     foreach(var property in notifyAttribute.SourceProperties)
                     {
-                        ChangedObject(dependantPropertyInfo.Name).Notify(property);
+                        ChangedObjectNotifyPropertyChange(dependantPropertyInfo.Name, property);
                     }
                 }
 
                 // Check for DependsOnAttribute
-                var dependsOnAttribute = dependantPropertyInfo.GetCustomAttribute<DependsOnAttribute>();
+                var dependsOnAttribute = dependantPropertyInfo.GetCustomAttribute<DependsOnPropertyAttribute>();
                 if(dependsOnAttribute != null)
                 {
                     foreach(var property in dependsOnAttribute.SourceProperties)
                     {
-                        ChangedObject(property).Notify(dependantPropertyInfo.Name);
+                        ChangedObjectNotifyPropertyChange(property, dependantPropertyInfo.Name);
                     }
                 }
             }
@@ -356,11 +360,9 @@ namespace MVVMBase
         /// <param name="actions">Related properties</param>
         public void ChangedObjectNotifyPropertyChange(string propertyName, params string[] actions)
         {
-            List<string> list;
-            if(dependencyDictionary.TryGetValue(propertyName, out list))
+            if(dependencyDictionary.TryGetValue(propertyName, out var list))
             {
-                list.AddRange(actions);
-                dependencyDictionary[propertyName] = new List<string>(list.Distinct());
+                dependencyDictionary[propertyName] = new List<string>(list.Union(actions));
             }
             else
             {

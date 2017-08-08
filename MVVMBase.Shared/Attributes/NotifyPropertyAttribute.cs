@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MVVMBase
 {
     /// <summary>
     /// Depends on attribute.
     /// </summary>
-    public class NotifyAttribute : Attribute
+    public class NotifyPropertyAttribute : Attribute
     {
         /// <summary>
         /// Gets or sets the source property.
@@ -18,7 +17,7 @@ namespace MVVMBase
         /// <summary>
         /// Initializes a new instance of the NotifyAttribute class.
         /// </summary>
-        public NotifyAttribute(params string[] propertyNames)
+        public NotifyPropertyAttribute(params string[] propertyNames)
         {
             SourceProperties = propertyNames;
         }

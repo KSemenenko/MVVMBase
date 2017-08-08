@@ -9,8 +9,8 @@
     <Import_RootNamespace>MVVMBase</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NotifyAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\DependsOnAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NotifyPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\DependsOnPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotifyPropertyChangedExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\MvvmCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SharedAssemblyInfo.cs" />

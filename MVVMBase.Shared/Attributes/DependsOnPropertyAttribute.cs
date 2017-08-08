@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MVVMBase
 {
     /// <summary>
     /// Depends on attribute.
     /// </summary>
-    public class DependsOnAttribute : Attribute
+    public class DependsOnPropertyAttribute : Attribute
     {
         /// <summary>
         /// Gets or sets the source property.
@@ -18,7 +17,7 @@ namespace MVVMBase
         /// <summary>
         /// Initializes a new instance of the DependsOnAttribute class.
         /// </summary>
-        public DependsOnAttribute(params string[] propertyNames)
+        public DependsOnPropertyAttribute(params string[] propertyNames)
         {
             SourceProperties = propertyNames;
         }

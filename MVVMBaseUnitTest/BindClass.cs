@@ -75,7 +75,7 @@ namespace MVVMBaseUnitTest
             }
         }
 
-        [Notify(nameof(MyDependCommand))]
+        [NotifyProperty(nameof(MyDependCommand))]
         public string MyDependProperty
         {
             get { return GetValue<string>(); }
@@ -96,13 +96,13 @@ namespace MVVMBaseUnitTest
             set { SetValue(value); }
         }
 
-        [DependsOn(nameof(MyObservableProperty))]
+        [DependsOnPropertyAttribute(nameof(MyObservableProperty))]
         public int MyObservablePropertyCount
         {
             get { return MyObservableProperty.Sum(); }
         }
 
-        [DependsOn(nameof(MyPropertyIntAutoGetSet))]
+        [DependsOnPropertyAttribute(nameof(MyPropertyIntAutoGetSet))]
         public int MyDependedPropertyInt => MyPropertyIntAutoGetSet * MyPropertyIntAutoGetSet;
 
         public MvvmCommand MyCommand

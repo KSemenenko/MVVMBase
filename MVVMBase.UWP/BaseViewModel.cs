@@ -10,9 +10,9 @@ namespace MVVMBase
     {
         partial void SetUiThread()
         {
-            runOnUiThread = (action) => 
+            runOnUiThread = async (action) => 
             {
-                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, ()=> action());
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, ()=> action());
             };
         }
     }
