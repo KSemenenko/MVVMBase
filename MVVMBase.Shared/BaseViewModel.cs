@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -16,8 +17,9 @@ namespace MVVMBase
     public partial class BaseViewModel : INotifyPropertyChanged
     {
         private readonly Dictionary<string, object> _storage = new Dictionary<string, object>();
-        private readonly Dictionary<string, List<string>> bindDictionary = new Dictionary<string, List<string>>();
-        private string bindPropertyName;
+        private readonly Dictionary<string, List<string>> dependencyDictionary = new Dictionary<string, List<string>>();
+        readonly Dictionary<object, string> _collectionDependencies = new Dictionary<object, string>();
+        private string dependencyPropertyName;
 
         private Action<Action> runOnUiThread;
 
@@ -77,7 +79,7 @@ namespace MVVMBase
             CallPropertyChangedEvent(propertyName);
 
             //bind properties
-            if(bindDictionary.TryGetValue(propertyName, out var lst))
+            if(dependencyDictionary.TryGetValue(propertyName, out var lst))
             {
                 foreach(var item in lst)
                 {
@@ -179,12 +181,38 @@ namespace MVVMBase
         {
             if(_storage.ContainsKey(key))
             {
+                var existingValue = _storage[key];
+                if(existingValue != null && existingValue is INotifyCollectionChanged)
+                {
+                    (existingValue as INotifyCollectionChanged).CollectionChanged -= HandleNotifyCollectionChangedEventHandler;
+                    if(_collectionDependencies.ContainsKey(existingValue))
+                    {
+                        _collectionDependencies.Remove(existingValue);
+                    }
+                        
+                }
+
                 _storage[key] = value;
             }
             else
             {
                 _storage.Add(key, value);
             }
+
+            if(value != null && value is INotifyCollectionChanged)
+            {
+                _collectionDependencies.Add(value, key);
+                (value as INotifyCollectionChanged).CollectionChanged += HandleNotifyCollectionChangedEventHandler;
+            }
+
+            //if (_storage.ContainsKey(key))
+            //{
+            //    _storage[key] = value;
+            //}
+            //else
+            //{
+            //    _storage.Add(key, value);
+            //}
         }
 
         /// <summary>
@@ -222,36 +250,42 @@ namespace MVVMBase
 
         private void ResolvePropertyAttribute()
         {
-            
             foreach(var dependantPropertyInfo in GetType().GetRuntimeProperties())
             {
                 // Check for NotifyAttribute
                 var notifyAttribute = dependantPropertyInfo.GetCustomAttribute<NotifyAttribute>();
-                if(notifyAttribute == null)
+                if(notifyAttribute != null)
                 {
-                    continue;
-                }
-
-                foreach(var property in notifyAttribute.SourceProperties)
-                {
-                    ChangedObject(dependantPropertyInfo.Name).Notify(property);
+                    foreach(var property in notifyAttribute.SourceProperties)
+                    {
+                        ChangedObject(dependantPropertyInfo.Name).Notify(property);
+                    }
                 }
 
                 // Check for DependsOnAttribute
                 var dependsOnAttribute = dependantPropertyInfo.GetCustomAttribute<DependsOnAttribute>();
-                if (dependsOnAttribute == null)
+                if(dependsOnAttribute != null)
                 {
-                    continue;
-                }
-
-                foreach (var property in dependsOnAttribute.SourceProperties)
-                {
-                    ChangedObject(property).Notify(dependantPropertyInfo.Name);
+                    foreach(var property in dependsOnAttribute.SourceProperties)
+                    {
+                        ChangedObject(property).Notify(dependantPropertyInfo.Name);
+                    }
                 }
             }
-            
         }
 
+        /// <summary>
+        /// Handles the notify collection changed event handler.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void HandleNotifyCollectionChangedEventHandler(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(sender is INotifyCollectionChanged && _collectionDependencies.ContainsKey(sender))
+            {
+                OnPropertyChanged(_collectionDependencies[sender]);
+            }
+        }
 
         /// <summary>
         ///     Raise the property and call the PropertyChanged event.
@@ -270,7 +304,7 @@ namespace MVVMBase
         /// <param name="propertyName">Property name</param>
         public BaseViewModel ChangedObject(string propertyName)
         {
-            bindPropertyName = propertyName;
+            dependencyPropertyName = propertyName;
             return this;
         }
 
@@ -280,7 +314,7 @@ namespace MVVMBase
         /// <param name="propertyName">Property name</param>
         public BaseViewModel ChangedObject<T>(Expression<Func<T>> propertyName)
         {
-            bindPropertyName = GetPropertyName(propertyName);
+            dependencyPropertyName = GetPropertyName(propertyName);
             return this;
         }
 
@@ -290,12 +324,12 @@ namespace MVVMBase
         /// <param name="propertyName">Property name</param>
         public BaseViewModel Notify(string propertyName)
         {
-            if(string.IsNullOrEmpty(bindPropertyName))
+            if(string.IsNullOrEmpty(dependencyPropertyName))
             {
-                throw new ArgumentException("Bind property not set.");
+                throw new ArgumentException("Dependency PropertyNamenot set.");
             }
 
-            ChangedObjectNotifyPropertyChange(bindPropertyName, propertyName);
+            ChangedObjectNotifyPropertyChange(dependencyPropertyName, propertyName);
             return this;
         }
 
@@ -305,12 +339,12 @@ namespace MVVMBase
         /// <param name="propertyName">Property name</param>
         public BaseViewModel Notify<T>(Expression<Func<T>> propertyName)
         {
-            if(string.IsNullOrEmpty(bindPropertyName))
+            if(string.IsNullOrEmpty(dependencyPropertyName))
             {
                 throw new ArgumentException("Depends property not set.");
             }
 
-            ChangedObjectNotifyPropertyChange(bindPropertyName, GetPropertyName(propertyName));
+            ChangedObjectNotifyPropertyChange(dependencyPropertyName, GetPropertyName(propertyName));
             return this;
         }
 
@@ -323,14 +357,14 @@ namespace MVVMBase
         public void ChangedObjectNotifyPropertyChange(string propertyName, params string[] actions)
         {
             List<string> list;
-            if(bindDictionary.TryGetValue(propertyName, out list))
+            if(dependencyDictionary.TryGetValue(propertyName, out list))
             {
                 list.AddRange(actions);
-                bindDictionary[propertyName] = new List<string>(list.Distinct());
+                dependencyDictionary[propertyName] = new List<string>(list.Distinct());
             }
             else
             {
-                bindDictionary.Add(propertyName, new List<string>(actions));
+                dependencyDictionary.Add(propertyName, new List<string>(actions));
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,6 +88,18 @@ namespace MVVMBaseUnitTest
         {
             get { return GetValue<int>(); }
             set { SetValue(value); }
+        }
+
+        public ObservableCollection<int> MyObservableProperty
+        {
+            get { return GetValue<ObservableCollection<int>>(); }
+            set { SetValue(value); }
+        }
+
+        [DependsOn(nameof(MyObservableProperty))]
+        public int MyObservablePropertyCount
+        {
+            get { return MyObservableProperty.Sum(); }
         }
 
         [DependsOn(nameof(MyPropertyIntAutoGetSet))]

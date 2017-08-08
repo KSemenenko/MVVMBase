@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Windows.Input;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -128,7 +130,7 @@ namespace MVVMBaseUnitTest
             myClass.UpdateAll();
 
             Thread.Sleep(1000);
-            Assert.AreEqual(count, 9); // 6 properties and 3 commands
+            Assert.AreEqual(count, 8); // 5 properties and 3 commands
         }
 
         [TestMethod]
@@ -192,12 +194,28 @@ namespace MVVMBaseUnitTest
             myClass.PropertyChanged += (se, ev) =>
             {
                 propertyList.Add(ev.PropertyName);
-                Assert.AreEqual(ev.PropertyName, "MyPropertyIntAutoGetSet");
             };
             myClass.MyPropertyIntAutoGetSet = 10; 
-            Assert.AreEqual(propertyList.Count, 1);
+            Assert.AreEqual(propertyList.Count, 2);
             Assert.AreEqual(myClass.MyDependedPropertyInt, myClass.MyPropertyIntAutoGetSet * myClass.MyPropertyIntAutoGetSet);
             
+        }
+
+        [TestMethod]
+        public void ObservableTest()
+        {
+            var myClass = new BindClass();
+            List<string> propertyList = new List<string>();
+            myClass.PropertyChanged += (se, ev) =>
+            {
+                propertyList.Add(ev.PropertyName);
+            };
+            myClass.MyObservableProperty = new ObservableCollection<int>();
+            myClass.MyObservableProperty.Add(1);
+            myClass.MyObservableProperty.Add(2);
+            Assert.AreEqual(propertyList.Count, 6);
+            Assert.AreEqual(myClass.MyObservablePropertyCount, myClass.MyObservableProperty.Sum());
+
         }
 
         [TestMethod]
