@@ -239,14 +239,7 @@ namespace MVVMBase
                 SetObjectForKey(key, defaultValue);
             }
 
-            try
-            {
-                return (T)Convert.ChangeType(_storage[key], typeof(T));
-            }
-            catch
-            {
-                return (T)_storage[key];
-            }
+            return (T)_storage[key];
         }
 
         /// <summary>

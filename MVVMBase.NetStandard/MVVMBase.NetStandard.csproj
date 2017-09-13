@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+  </PropertyGroup>
+
+  <Import Project="..\MVVMBase.Shared\MVVMBase.Shared.projitems" Label="Shared" />
+
+</Project>
