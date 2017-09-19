@@ -54,6 +54,22 @@ namespace MVVMBase
         }
 
         /// <summary>
+        /// Run Action on UI Thread
+        /// </summary>
+        /// <param name="action">Action</param>
+        public void RunOnUiThread(Action action)
+        {
+            if (runOnUiThread != null)
+            {
+                runOnUiThread(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+
+        /// <summary>
         ///     Changes the property and call the PropertyChanged event.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -374,6 +390,7 @@ namespace MVVMBase
             var stringAction = GetPropertyName(propertyName);
             ChangedObjectNotifyPropertyChange(stringAction, propertyNames);
         }
+
 
         #endregion
     }
