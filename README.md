@@ -11,7 +11,7 @@ https://www.nuget.org/packages/ksemenenko.MVVMBase/
 
 ## Example use:
 ```cs
-public class ModelClass : BaseViewModel
+public class ModelClass : NotifyObject
 {
 
     public ModelClass()

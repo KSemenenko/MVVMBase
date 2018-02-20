@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Input;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MVVMBase;
+using MVVMBase.Extensions;
 
 namespace MVVMBaseUnitTest
 {

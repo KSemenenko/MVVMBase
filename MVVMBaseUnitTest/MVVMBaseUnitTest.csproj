@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MVVMBaseUnitTest</RootNamespace>
     <AssemblyName>MVVMBaseUnitTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,9 +58,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MVVMBase.Desktop.v45\MVVMBase.Desktop.v45.csproj">
-      <Project>{ba56f824-2a99-45fd-8adb-3af0a7aa3848}</Project>
-      <Name>MVVMBase.Desktop.v45</Name>
+    <ProjectReference Include="..\MVVMBase.Desktop.v47\MVVMBase.Desktop.v47.csproj">
+      <Project>{73dad0e2-507d-453a-8836-86bb7ffbb44c}</Project>
+      <Name>MVVMBase.Desktop.v47</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

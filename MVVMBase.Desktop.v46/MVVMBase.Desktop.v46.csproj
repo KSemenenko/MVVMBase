@@ -42,7 +42,7 @@
     <Compile Include="..\MVVMBase.Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="PartialUiThread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="..\MVVMBase.Shared\MVVMBase.Shared.projitems" Label="Shared" />

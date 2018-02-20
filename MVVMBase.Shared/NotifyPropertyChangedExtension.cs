@@ -6,7 +6,7 @@ using System.Threading;
 namespace MVVMBase
 {
     /// <summary>
-    ///     BaseViewModelExtension
+    ///     NotifyObjectExtension
     /// </summary>
     public static class NotifyPropertyChangedExtension
     {

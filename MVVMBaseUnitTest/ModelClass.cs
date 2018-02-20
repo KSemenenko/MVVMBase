@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MVVMBase;
 using MVVMBase.Commands;
+using MVVMBase.Extensions;
 
 namespace MVVMBaseUnitTest
 {
-    public class ModelClass : BaseViewModel
+    public class ModelClass : NotifyObject
     {
         private string myCommandProperty;
         private string myProperty;

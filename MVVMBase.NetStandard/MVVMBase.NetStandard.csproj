@@ -1,7 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <Product />
+    <Company />
+    <Authors />
+    <Version>1.5.0.0</Version>
+    <Copyright>Copyright © K.Semenenko 2018</Copyright>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.4\MVVMBase.NetStandard.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.4\MVVMBase.NetStandard.xml</DocumentationFile>
   </PropertyGroup>
 
   <Import Project="..\MVVMBase.Shared\MVVMBase.Shared.projitems" Label="Shared" />

@@ -10,7 +10,7 @@ using MVVMBase.Commands;
 
 namespace MVVMBaseUnitTest
 {
-    public class BindClass : BaseViewModel
+    public class BindClass : NotifyObject
     {
         private string myCommandProperty;
         private string myProperty;

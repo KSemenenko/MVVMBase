@@ -11,13 +11,36 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NotifyPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\DependsOnPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Bind.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\GroupedObservableCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\NotifyConcurrentQueueChangedAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\NotifyConcurrentQueueChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\ObservableConcurrentQueue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\ObservableDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\OptimizedObservableCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\RangedObservableCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\RefreshingCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CollectionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ICommandExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TaskExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IAsyncDelegateCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDelegateCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDependencyService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IMessageVisualizerService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\INavigationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\AsyncDelegateCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\DelegateCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mvvm\PropertyObserver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mvvm\SimpleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotifyPropertyChangedExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\MvvmCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotifyObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ReflectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SharedAssemblyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)BaseViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Commands\BaseMvvmCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\TypedStorage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Collections\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Common\" />
   </ItemGroup>
 </Project>
