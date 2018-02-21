@@ -31,7 +31,7 @@
     <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.xml" target="lib\net46\MVVMBase.xml" />
     <file src="MVVMBase.Desktop.v46\bin\Release\MVVMBase.pdb" target="lib\net46\MVVMBase.pdb" />
     
-    <!--.NET 4.6-->
+    <!--.NET 4.7-->
     <file src="MVVMBase.Desktop.v47\bin\Release\MVVMBase.dll" target="lib\net47\MVVMBase.dll" />
     <file src="MVVMBase.Desktop.v47\bin\Release\MVVMBase.xml" target="lib\net47\MVVMBase.xml" />
     <file src="MVVMBase.Desktop.v47\bin\Release\MVVMBase.pdb" target="lib\net47\MVVMBase.pdb" />
