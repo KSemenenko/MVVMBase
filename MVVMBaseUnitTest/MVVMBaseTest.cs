@@ -219,20 +219,5 @@ namespace MVVMBaseUnitTest
 
         }
 
-        [TestMethod]
-        public void NotifyPropertyChangedExtensionText()
-        {
-            var myClass1 = new NotifyPropertyChangedExtensionClass();
-            myClass1.PropertyChanged += (se, ev) => { Assert.AreEqual(ev.PropertyName, "Poperty1"); };
-            myClass1.Poperty1 = "string";
-
-            var myClass2 = new NotifyPropertyChangedExtensionClass();
-            myClass2.PropertyChanged += (se, ev) => { Assert.AreEqual(ev.PropertyName, "Poperty2"); };
-            myClass2.Poperty2 = "string";
-
-            Thread.Sleep(1000);
-            Assert.AreEqual(myClass1.Poperty1, "string");
-            Assert.AreEqual(myClass2.Poperty2, "string");
-        }
     }
 }

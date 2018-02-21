@@ -54,7 +54,6 @@
     <Compile Include="BindClass.cs" />
     <Compile Include="ModelClass.cs" />
     <Compile Include="MVVMBaseTest.cs" />
-    <Compile Include="NotifyPropertyChangedExtensionClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
