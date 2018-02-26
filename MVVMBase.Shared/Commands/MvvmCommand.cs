@@ -20,31 +20,6 @@ namespace MVVMBase.Commands
         ///     Initializes a new instance of the  class.
         /// </summary>
         /// <param name="execute">The execute action.</param>
-        /*public MvvmCommand(Func<Task> execute, ICanShowError errorHandler=null)
-        {
-            if (execute == null)
-            {
-                throw new ArgumentNullException(nameof(execute));
-            }
-            _executeTask = f =>
-            {
-                try
-                {
-                    Task result = execute();
-                    return result;
-                }
-                catch (PumaApiException ex)
-                {
-                    errorHandler?.ShowError(ex.Message);
-                    return Task.CompletedTask;
-                }
-            };
-            IsAsync = true;
-        }*/
-        /// <summary>
-        ///     Initializes a new instance of the  class.
-        /// </summary>
-        /// <param name="execute">The execute action.</param>
         /// <param name="canExecute">The can execute predicate.</param>
         public MvvmCommand(Action<T> execute, Predicate<T> canExecute = null)
         {
@@ -155,31 +130,7 @@ namespace MVVMBase.Commands
 
         protected bool IsAsync;
 
-        /// <summary>
-        ///     Initializes a new instance of the  class.
-        /// </summary>
-        /// <param name="execute">The execute action.</param>
-        /*public MvvmCommand(Func<Task> execute, ICanShowError errorHandler=null)
-        {
-            if (execute == null)
-            {
-                throw new ArgumentNullException(nameof(execute));
-            }
-            _executeTask = f =>
-            {
-                try
-                {
-                    Task result = execute();
-                    return result;
-                }
-                catch (PumaApiException ex)
-                {
-                    errorHandler?.ShowError(ex.Message);
-                    return Task.CompletedTask;
-                }
-            };
-            IsAsync = true;
-        }*/
+
         /// <summary>
         ///     Initializes a new instance of the  class.
         /// </summary>
